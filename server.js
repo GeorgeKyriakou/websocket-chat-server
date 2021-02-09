@@ -16,6 +16,10 @@ app.options("*", cors());
 //Run when a client connects
 io.on("connect", (socket) => {
   /** ************* Connect/Disconnect stuff ************* */
+  socket.emit(
+    "msgFromServer",
+    JSON.stringify({ id: socket.id, msg: presets.GREET_USER })
+  ); //broadcast to the specific user that has just connected
 
   socket.broadcast.emit("msgFromServer", {
     id: socket.id,
